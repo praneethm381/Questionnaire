@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
 
+  # Called for a GET /questions request.
   def index
     @questions = Question.all
 
@@ -10,6 +11,7 @@ class QuestionsController < ApplicationController
     end
   end
 
+  # Called for GET /questions/new request.
   def new
     @question = Question.new
 
@@ -20,6 +22,7 @@ class QuestionsController < ApplicationController
     end
   end
 
+  # Called for GET /questions/1 request.
   def show
     @question = Question.find(params[:id])
 
@@ -30,6 +33,7 @@ class QuestionsController < ApplicationController
     end
   end
 
+  # Called for a POST /questions request.
   def create
     @question = Question.new(params.require(:question).permit(:text))
 
@@ -45,10 +49,12 @@ class QuestionsController < ApplicationController
     end
   end
 
+  # Called for a GET /questions/1/edit request.
   def edit
     @question = Question.find(params[:id])
   end
 
+  # Called for a PUT /questions/1 request.
   def update
     @question = Question.find(params[:id])
 
@@ -64,6 +70,7 @@ class QuestionsController < ApplicationController
     end
   end
 
+  # Called for a DELETE /questions/1 request.
   def destroy
     @question = Question.find(params[:id])
     @question.destroy

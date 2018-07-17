@@ -3,22 +3,30 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-Things you may want to cover:
+* Installation
 
-* Ruby version
+Download the repo.
+Do `bundle install`
+Run `rails server`
+open `http://localhost:3000`
 
-* System dependencies
+Things I want to cover in this:
 
-* Configuration
+* How Rest URL's work in Rails.
 
-* Database creation
+For resources :questions
 
-* Database initialization
+Http method   Rest url           rails controller method   rails helper paths
+GET         "/questions"                index                 questions_path
+GET         "/questions/:id"            show                  question
+GET         "/questions/new"            new                   new_question_path
+POST        "/questions"                create                
+GET         "/questions/:id/edit"       edit                  edit_question_path
+PUT         "/questions/:id"            Update                question
+DELETE      "/questions/:id"            destroy               question
 
-* How to run the test suite
+For resourcs :choices, only:[:create, :destroy]
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Http method   Rest url           rails controller method   rails helper paths
+POST         "/choices"                create                   
+DELETE       "/choices/:id"            destroy                  choice
