@@ -30,6 +30,12 @@ RSpec.describe 'Questions', type: :request do
       expect(json.class).to eq(Hash)
       expect(json['text']).to eq('This is a test question?')
     end
+
+    it "renders correct template" do
+      question = create(:question)
+      get "/questions/#{question.id}"
+      expect(response.body).to render_template(:show)
+    end
   end
 
   describe "NEW #new" do
@@ -41,6 +47,12 @@ RSpec.describe 'Questions', type: :request do
       expect(response).to be_successful
       expect(json.class).to eq(Hash)
       expect(json['text']).to eq(nil)
+    end
+
+    it "renders correct template" do
+      question = create(:question)
+      get "/questions/new"
+      expect(response.body).to render_template(:new)
     end
   end
 
