@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
   # Called for a GET /questions request.
   def index
     @questions = Question.all
-
+    
     respond_to do |format|
       format.html
       format.xml  { render :xml => @questions }
