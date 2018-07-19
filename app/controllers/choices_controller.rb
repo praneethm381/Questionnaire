@@ -4,6 +4,7 @@ class ChoicesController < ApplicationController
     @question = Question.find(params[:question])
     text = params[:text]
     correct = params[:correct] == '1'
+    byebug
     Choice.create(:text => text, :correct => correct, :question_id => @question.id)
     redirect_to question_path(@question)
   end

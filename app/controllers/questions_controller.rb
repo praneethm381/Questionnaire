@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  before_action :set_question, only: %i[update destroy edit show]
 
   # Called for a GET /questions request.
   def index
@@ -24,8 +25,6 @@ class QuestionsController < ApplicationController
 
   # Called for GET /questions/1 request.
   def show
-    @question = Question.find(params[:id])
-
     respond_to do |format|
       format.html
       format.xml  { render :xml => @question }
@@ -35,29 +34,21 @@ class QuestionsController < ApplicationController
 
   # Called for a POST /questions request.
   def create
-    @question = Question.new(params.require(:question).permit(:text))
+    @question = Question.create!(params.require(:question).permit(:text))
 
     respond_to do |format|
-      if @question.save
-        format.html { redirect_to(@question, :notice => 'Question is created successfully.') }
-        format.xml  { render :xml => @question, :status => :created, :location => @question }
-        format.json  { render :json => @question }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @question.errors, :status => :unprocessable_entity }
-      end
+      format.html { redirect_to(@question, :notice => 'Question is created successfully.') }
+      format.xml  { render :xml => @question, :status => :created }
+      format.json  { render :json => @question }
     end
   end
 
   # Called for a GET /questions/1/edit request.
   def edit
-    @question = Question.find(params[:id])
   end
 
   # Called for a PUT /questions/1 request.
   def update
-    @question = Question.find(params[:id])
-
     respond_to do |format|
       if @question.update_attributes(params.require(:question).permit(:text))
         format.html { redirect_to(@question, :notice => 'Question is updated successfully.') }
@@ -72,13 +63,18 @@ class QuestionsController < ApplicationController
 
   # Called for a DELETE /questions/1 request.
   def destroy
-    @question = Question.find(params[:id])
     @question.destroy
 
     respond_to do |format|
       format.html { redirect_to(questions_path) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def set_question
+    @question = Question.find(params[:id])
   end
 
 end

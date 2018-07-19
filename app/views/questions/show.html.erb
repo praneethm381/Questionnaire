@@ -12,7 +12,7 @@
 		<%= choice.text %>
 		<% if choice.correct %> (Correct) <% end %>
 		
-		<%= form_tag({:controller => "choices", :action => "destroy"}) do %>
+		<%= form_tag("/questions/#{@question.id}/choices/#{choice.id}", :method => "delete") do %>
 		  <%= hidden_field_tag :question, @question.id %>
 		  <%= hidden_field_tag :choice, choice.id %>
 		  <%= submit_tag "Delete" %>
@@ -22,7 +22,7 @@
 </ul>
 
 <h5>New Choice</h5>
-<%= form_tag({:controller => "choices", :action => "create"}) do %>
+<%= form_tag("/questions/#{@question.id}/choices", :method => "create") do %>
   <%= hidden_field_tag :question, @question.id %>
   
   <%= label_tag :text, "Text" %>

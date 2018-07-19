@@ -5,8 +5,8 @@ RSpec.describe 'choices', type: :request do
   describe "POST #create" do
     it "saves given choice" do
       question = create(:question)
-      post '/choices', params: {question: question.id, text: 'option1', correct: true, question_id: question.id}
-
+      post '/choices', params: {question: question.id, text: 'option1', correct: '0', question_id: question.id}
+      
       expect(response.body).to include('<a href="http://www.example.com/questions/1">')
       expect(response.body).to redirect_to("http://www.example.com/questions/1")
     end
