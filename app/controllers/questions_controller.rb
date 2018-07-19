@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: %i[update destroy edit show]
+  before_action :set_question, except: %i[index new create]
 
   # Called for a GET /questions request.
   def index
@@ -7,8 +7,8 @@ class QuestionsController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.xml  { render :xml => @questions }
-      format.json  { render :json => @questions }
+      format.xml  { render xml: @questions }
+      format.json  { render json: @questions }
     end
   end
 
@@ -18,8 +18,8 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.xml  { render :xml => @question }
-      format.json  { render :json => @question }
+      format.xml  { render xml: @question }
+      format.json  { render json: @question }
     end
   end
 
@@ -27,8 +27,8 @@ class QuestionsController < ApplicationController
   def show
     respond_to do |format|
       format.html
-      format.xml  { render :xml => @question }
-      format.json  { render :json => @question }
+      format.xml  { render xml: @question }
+      format.json  { render json: @question }
     end
   end
 
@@ -37,9 +37,9 @@ class QuestionsController < ApplicationController
     @question = Question.create!(params.require(:question).permit(:text))
 
     respond_to do |format|
-      format.html { redirect_to(@question, :notice => 'Question is created successfully.') }
-      format.xml  { render :xml => @question, :status => :created }
-      format.json  { render :json => @question }
+      format.html { redirect_to(@question, notice: 'Question is created successfully.') }
+      format.xml  { render xml: @question, status: :created }
+      format.json  { render json: @question }
     end
   end
 
@@ -51,12 +51,12 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @question.update_attributes(params.require(:question).permit(:text))
-        format.html { redirect_to(@question, :notice => 'Question is updated successfully.') }
+        format.html { redirect_to(@question, notice: 'Question is updated successfully.') }
         format.xml  { head :ok }
-        format.json  { render :json => @question }
+        format.json  { render json: @question }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @question.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.xml  { render xml: @question.errors, status: :unprocessable_entity }
       end
     end
   end
