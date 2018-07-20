@@ -3,7 +3,7 @@ class ChoicesController < ApplicationController
 
   def create
     text = params[:text]
-    correct = 'test' # params[:correct] == '1'
+    correct = params[:correct] == '1'
     Choice.create!(text: text, correct: correct, question_id: @question.id)
     redirect_to question_path(@question)
   end
