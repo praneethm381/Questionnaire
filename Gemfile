@@ -37,6 +37,12 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
+  # rspec-rails is a testing framework for Rails 3.x and 4.x.
+  gem 'rspec-rails', '~> 3.6', '>= 3.6.1'
+  # Provides the capability to generate data for tests easily
+  gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
+
+  gem 'rails-controller-testing'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end

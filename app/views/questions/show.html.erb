@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Question Text:</b>
+  <%= @question.text %>
+</p>
+
+<h2>Choices:</h2>
+<ul>
+  <% @question.choices.each do |choice| %>
+	 <li>
+		<%= choice.text %>
+		<% if choice.correct %> (Correct) <% end %>
+		
+		<%= form_tag("/questions/#{@question.id}/choices/#{choice.id}", method: "delete") do %>
+		  <%= submit_tag "Delete" %>
+		<% end %>
+	 </li>
+  <% end %>
+</ul>
+
+<h5>New Choice</h5>
+<%= form_tag("/questions/#{@question.id}/choices", method: "create") do %>
+  <%= label_tag :text, "Text" %>
+  <%= text_field_tag :text %>
+  <%= check_box_tag :correct %>
+  <%= label_tag :correct, "Correct" %>
+  <br /><br />
+  <%= submit_tag "Create" %>
+<% end %>
+
+<br /><br />
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>
